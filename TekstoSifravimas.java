@@ -16,21 +16,26 @@ import java.io.OutputStreamWriter;
 import java.util.*;
 import java.nio.charset.StandardCharsets;
 
-
+/**
+* Pavyzdinė programėlė teksto šifravimui sukeičiant vietomis žodžius porose (imant po 2-u)
+*@author Dėstytojas
+*/
 public class TekstoSifravimas {
 	
 	public static void main(String[] args)  throws IOException  {
 
+																							// failo skaitymas utf-8 format
+		
 		File fileDir = new File( "tekstas.txt" );
 		BufferedReader br = new BufferedReader(  new InputStreamReader(  new FileInputStream ( fileDir ), "UTF8" ) );
-		
+																							// sukeitimo tvarkos įvedimas, kol kas nenaudojamas, reikalingas sudėtingesnei užduočiai
 		BufferedReader reader = new BufferedReader ( new InputStreamReader (System.in ) );
 		
 		System.out.print ( "Iveskite sifravimo tvarka : " );
 		String[] tvarka_strs = reader.readLine().split( "," );
 		Integer[] tvarka_sk = new Integer[ 8 ];
 		String[] zodziai8 = new String[ 8 ];
-		
+																							// suketimo tvarka išsaugoma sveikų skaičių masyve ir suskaičiuojama kontrolinė suma
 		int k = 0; 
 		int suma =0;
 		for ( String zodzio_nr : tvarka_strs ) {
@@ -42,6 +47,8 @@ public class TekstoSifravimas {
 
 		
 		System.out.println ( "tvarkos skaiciu kontroline suma : " + suma );
+		
+																							// atliekamas šifravimas
 		
 		String thisLine;
 		String[] tekstas = new String [100 ];
@@ -71,6 +78,8 @@ public class TekstoSifravimas {
 			uzsifruotas_tekstas [ j ] = uzsifruota_eilute;
 			j++;
 		}
+		
+																							// užšifruotas tekstas išsaugomas utf-8 koduote
 		
 		File res_file_dir = new File( "uzsifruotas_tekstas.txt" );		
 		BufferedWriter bw = new BufferedWriter( new OutputStreamWriter ( new FileOutputStream ( res_file_dir ) , StandardCharsets.UTF_8 ) );
